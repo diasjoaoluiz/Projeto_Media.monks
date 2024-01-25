@@ -1,7 +1,9 @@
+var dataBase1, dataBase2;
+
 function lerJSONs() {
     try {
-        database_1 = require ("./json's_originais/broken_database_1.json");
-        database_2 = require ("./json's_originais/broken_database_2.json");
+        dataBase1 = require ("./json's_originais/broken_database_1.json");
+        dataBase2 = require ("./json's_originais/broken_database_2.json");
         console.log("Deu certo");
     } catch(error) {
         console.log("Erro ao ler os arquivos");
@@ -10,4 +12,44 @@ function lerJSONs() {
 
 lerJSONs();
 
+function corrigirDataBase (db1, db2) {
+    for(i=0; i < db1.length; i++) {
+        for(j=0; j < db1[i].nome.length; j++) {
+            db1[i].nome = db1[i].nome.replace("æ", "a");
+            db1[i].nome = db1[i].nome.replace("ø","o");
+            db1[i].vendas = Number(db1[i].vendas)
+        }
+    }
 
+    for(i=0; i < db2.length; i++) {
+        for(j=0; j < db2[i].marca.length; j++) {
+            db2[i].marca = db2[i].marca.replace("æ", "a");
+            db2[i].marca = db2[i].marca.replace("ø","o");
+        }
+    }
+}
+
+function exportarJSONs (db1, db2) {
+    let fs = require("fs");
+
+    fs.writeFile("./fixedDataBase1.json", JSON.stringify(db1), err => {
+        if(err) {
+            console.log("Erro ao escrever o arquivo!");
+            throw err;
+        }else {
+            console.log("Escrita concluida!");
+        }
+    });
+
+    fs.writeFile("./fixedDataBase2.json", JSON.stringify(db2), err =>{
+        if(err) {
+            console.log("Erro ao escrever o arquivo!");
+            throw err;
+        }else {
+            console.log("Escrita concluida!");
+        }
+    });
+}
+
+corrigirDataBase (dataBase1, dataBase2);
+exportarJSONs (dataBase1, dataBase2);
