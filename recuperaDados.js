@@ -12,12 +12,11 @@ function lerJSONs() {
 
 lerJSONs();
 
-function corrigirDataBase (db1, db2) {
+function corrigirNomes (db1, db2) {
     for(i=0; i < db1.length; i++) {
         for(j=0; j < db1[i].nome.length; j++) {
             db1[i].nome = db1[i].nome.replace("æ", "a");
             db1[i].nome = db1[i].nome.replace("ø","o");
-            db1[i].vendas = Number(db1[i].vendas)
         }
     }
 
@@ -25,6 +24,14 @@ function corrigirDataBase (db1, db2) {
         for(j=0; j < db2[i].marca.length; j++) {
             db2[i].marca = db2[i].marca.replace("æ", "a");
             db2[i].marca = db2[i].marca.replace("ø","o");
+        }
+    }
+}
+
+function corrigirVendas (db1) {
+    for(i=0; i < db1.length; i++) {
+        for(j=0; j < db1[i].nome.length; j++) {
+            db1[i].vendas = Number(db1[i].vendas)
         }
     }
 }
@@ -51,5 +58,6 @@ function exportarJSONs (db1, db2) {
     });
 }
 
-corrigirDataBase (dataBase1, dataBase2);
+corrigirNomes (dataBase1, dataBase2);
+corrigirVendas (dataBase1);
 exportarJSONs (dataBase1, dataBase2);
