@@ -1,4 +1,4 @@
-<h1 align="center"> Projeto destinado ao processo seletivo da empresa media.Monks. </h1>
+<h1 align="center"> Projeto destinado ao processo seletivo da empresa Media.Monks. </h1>
 
 <p> Objetivos </p>
 <ul>
